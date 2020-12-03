@@ -1,0 +1,15 @@
+<!--  Find all pages in this section, including all _index.md pages  -->
+{{ $pages := (where .Site.Pages "Section" .Section) }}
+<!-- Create the dropdown with the version numbers -->
+<div style="margin-left: 10px;"><p>Version select menu: <form id="page-changer" action="" method="post">
+    <select onChange="window.location.replace(this.options[this.selectedIndex].value);">
+        {{ range sort $pages "Params.Version" "desc" }}
+         <option value="{{ .Site.BaseURL }}{{ .RelPermalink }}">{{ .Params.Version }}</option>
+        {{ end }}</select></form></p>
+
+<p>Version links: 
+        {{ range sort $pages "Params.Version" "desc" }}
+         <a href="{{ .RelPermalink }}">{{ .Params.Version }}</a>
+        {{ end }}
+    </p>
+</div>
